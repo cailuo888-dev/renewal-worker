@@ -13,7 +13,12 @@ def renew_bot_hosting():
         return "SKIP: BOTHOSTING_EMAIL/PASSWORD not set"
 
     with sync_playwright() as p:
-        browser = p.chromium.launch(headless=True, args=['--no-sandbox'])
+        launch_kwargs = {'headless': True, 'args': ['--no-sandbox']}
+        proxy_server = os.environ.get('PROXY_SERVER', '')
+        if proxy_server:
+            launch_kwargs['proxy'] = {'server': proxy_server}
+            logger.info(f"Using proxy: {proxy_server}")
+        browser = p.chromium.launch(**launch_kwargs)
         try:
             page = browser.new_page()
             logger.info("Navigating to bot-hosting.net...")
