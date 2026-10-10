@@ -26,17 +26,17 @@ def should_run(name):
 
 if __name__ == '__main__':
     import sys
-    sys.path.insert(0, '/app')
-    from scripts.lunes_renew import renew_lunes
-    from scripts.katabump_renew import renew_katabump
-    from scripts.bot_hosting_renew import renew_bot_hosting
-    
+    sys.path.insert(0, '/scripts')
+    from lunes_renew import renew_lunes
+    from katabump_renew import renew_katabump
+    from bot_hosting_renew import renew_bot_hosting
+
     scripts = {
         'lunes': renew_lunes,
         'katabump': renew_katabump,
         'bot_hosting': renew_bot_hosting,
     }
-    
+
     logger.info("Worker 启动，等待定时任务...")
     while True:
         for name, func in scripts.items():

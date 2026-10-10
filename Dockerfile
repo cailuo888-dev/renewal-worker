@@ -7,5 +7,6 @@ RUN apt-get update && apt-get install -y git curl \
 RUN pip install --no-cache-dir playwright && playwright install chromium
 COPY entrypoint.sh /entrypoint.sh
 COPY worker.py /worker.py
+COPY scripts/ /scripts/
 RUN chmod +x /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
